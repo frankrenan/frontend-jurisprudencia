@@ -1,0 +1,341 @@
+.layout-config {
+	position: fixed;
+	padding: 0;
+	top: 60px;
+	display: block;
+	right: 0;
+	width: 550px;
+	z-index: 996;
+	height: calc(100% - 60px);
+	transform: translate3d(550px, 0px, 0px);
+	transition: transform $transitionDuration;
+
+	&.layout-config-active {
+		transform: translate3d(0px, 0px, 0px);
+
+		.layout-config-content {
+			.layout-config-button {
+				i {
+					transform: rotate(360deg);
+				}
+			}
+		}
+	}
+
+	.layout-config-content {
+		position: relative;
+		height: 100%;
+
+		> form {
+			height: 100%;
+		}
+
+		.layout-config-button {
+			display: block;
+			position: absolute;
+			width: 52px;
+			height: 52px;
+			line-height: 52px;
+			background-color: #fafafa;
+			text-align: center;
+			top: 230px;
+			left: -51px;
+			z-index: -1;
+			cursor: pointer;
+			color: $topbarBgColor;
+			transition: color $transitionDuration;
+			@include border-radius-left($borderRadius);
+			box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2),
+			0 5px 22px 4px rgba(0, 0, 0, 0.12),
+			0 12px 17px 2px rgba(0, 0, 0, 0.14);
+
+			i {
+				font-size: 32px;
+				line-height: inherit;
+				cursor: pointer;
+				transform: rotate(0deg);
+				transition: transform 1s;
+			}
+
+			&:hover {
+				color: lighten($topbarBgColor, 15%);
+			}
+		}
+	}
+
+	.layout-config-close {
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		line-height: 25px;
+		text-align: center;
+		right: 10px;
+		top: 10px;
+		border-radius: 50%;
+		background-color: #e0284f;
+		transition: background-color $transitionDuration;
+
+		i {
+			color: #ffffff;
+			line-height: inherit;
+			font-size: 16px;
+		}
+
+		&:hover {
+			background-color: #d44d69;
+		}
+	}
+
+	.p-col {
+		text-align: center;
+	}
+
+	.p-tabview {
+		border: 0 none;
+		display: flex;
+		height: 100%;
+		padding: 0;
+		background-color: #ffffff;
+		flex-direction: column;
+		box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.24);
+
+		> .p-tabview-nav {
+			display: flex;
+			flex-wrap: wrap;
+
+			li {
+				vertical-align: bottom;
+				top: auto;
+				margin: 0;
+				background-color: transparent;
+				border: 0 none;
+				border-radius: 0;
+				border-bottom: 3px solid transparent;
+				cursor: pointer;
+
+				&:not(.p-highlight):not(.p-disabled):hover {
+					border-color: lighten($color: $topbarBgColor, $amount: 25);
+					background-color: lighten($color: $topbarBgColor, $amount: 45);
+					transition: background-color $transitionDuration;
+
+					> a {
+						background-color: transparent;
+						border-color: transparent;
+						color: #1b1c1e;
+					}
+				}
+
+				&.p-highlight {
+					border-color: $topbarBgColor;
+					background-color: lighten($color: $topbarBgColor, $amount: 35);
+					transition: background-color $transitionDuration;
+
+					> a {
+						background-color: transparent;
+						border-color: transparent;
+						color: #1b1c1e;
+					}
+
+					&:hover {
+						background-color: lighten($color: $topbarBgColor, $amount: 45);
+						transition: background-color $transitionDuration;
+
+						> a {
+							background-color: transparent;
+							border-color: transparent;
+							color: #1b1c1e;
+						}
+					}
+				}
+
+				> a {
+					background-color: transparent;
+					border-color: transparent;
+					margin: 0;
+					color: #1b1c1e;
+					padding: 13px 15px 10px;
+				}
+			}
+		}
+
+		.p-tabview-panels {
+			padding: 0;
+			height: 100%;
+			overflow: auto;
+			border-width: 1px 0 0 0;
+			color: #1b1c1e;
+			@include border-radius-bottom(4px);
+
+			.p-tabview-panel {
+				padding: 2em ;
+			}
+
+			img {
+				max-height: 100px;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				display: flex;
+				flex-grow: 1;
+				flex-shrink: 0;
+			}
+
+			a {
+				display: flex;
+				width: auto;
+				height: auto;
+				position: relative;
+				overflow: hidden;
+				justify-content: center;
+				align-items: center;
+				transition: transform $transitionDuration;
+
+				&:hover {
+					transform: scale(1.1);
+				}
+				i {
+					font-size: 20px;
+					font-weight: bold;
+					color: $primaryColor;
+					position: absolute;
+					border-radius: 50%;
+					background-color: #ffffff;
+					width: 30px;
+					line-height: 30px;
+					height: 30px;
+					box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				}
+
+				&.layout-config-option {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					overflow: hidden;
+					text-align: center;
+					width: 65px;
+					height: 56px;
+					cursor: pointer;
+
+					&:hover {
+						transform: scale(1.1);
+					}
+
+					&.layout-config-option-light {
+						i {
+							color: #000000;
+						}
+					}
+				}
+			}
+
+			span:not(.p-inputswitch-slider) {
+				color: #000000;
+				font-size: 13px;
+				font-weight: 500;
+				display: block;
+				margin-top: 6px;
+				margin-bottom: 15px;
+			}
+
+			.p-disabled {
+				display: flex;
+				width: auto;
+				height: auto;
+				position: relative;
+				overflow: hidden;
+				justify-content: center;
+				align-items: center;
+				pointer-events: none;
+				cursor: default;
+
+				i {
+					font-size: 20px;
+					font-weight: bold;
+					color: $primaryColor;
+					position: absolute;
+					border-radius: 50%;
+					background-color: #ffffff;
+					width: 30px;
+					line-height: 30px;
+					height: 30px;
+					box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				}
+			}
+		}
+	}
+
+	p {
+		line-height: 1.5;
+		margin-top: 0;
+		color: $textSecondaryColor;
+	}
+}
+
+.blocked-scroll-config{
+	overflow: hidden;
+}
+
+.layout-rtl {
+	.layout-config {
+		direction: rtl;
+		right: auto;
+		left: 0;
+		width:  550px;
+		transform: translate3d(-550px, 0px, 0px);
+
+		&.layout-config-active {
+			transform: translate3d(0px, 0px, 0px);
+		}
+
+		.layout-config-button {
+			left: auto;
+			right: -51px;
+		}
+
+		.layout-config-close {
+			right: auto;
+			left: 7px;
+		}
+
+		.p-tabview {
+			&.p-tabview-top > .p-tabview-nav {
+				margin-left: 44px;
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 896px) {
+	.layout-config {
+		transform: translate3d(100%, 0px, 0px);
+
+		&.layout-config-active {
+			width: 100%;
+			transform: translate3d(0px, 0px, 0px);
+		}
+
+		.layout-config-button {
+			left: auto;
+			right: -52px;
+		}
+
+		.layout-config-close {
+			right: 10px;
+		}
+	}
+}
+
+
+@media screen and (min-width: 1200px) {
+	.layout-config {
+		.p-tabview-panels{
+			a {
+				&.layout-config-option {
+					img {
+						width: 70px;
+						height: 56px;
+					}
+				}
+			}
+		}
+	}
+}
