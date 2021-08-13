@@ -1,25 +1,29 @@
 <template>
-  <div class="layout-footer">
-    <div class="p-grid">
-      <div class="p-col-6">
-        <a href="https://www2.tce.am.gov.br/" target="_blank"
-          ><img
-            src="./assets/logo-amazonas.png"
-            alt="Logo do tribunal"
-            class="imagem-logo"
-        /></a>
+  <div>
+    <div id="footer">
+      <div class="p-grid">
+        <div class="p-col-12 p-lg-4">
+          <h1>Tribunal de Contas do Amazonas</h1>
+        </div>
+
+        <div class="p-col-12 p-lg-8 footer-menu">
+          <div class="p-grid">
+            <div class="p-col-12 p-md-6 p-lg-3">
+              <span>SUPORTE</span>
+
+              <a href="#home">Home</a>
+
+              <a href="#decisorios">Decisórios</a>
+
+              <a href="#faleConosco">Fale Conosco</a>
+
+              <!-- <a href="#forum">Forum</a> -->
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="p-col-6 footer-icons">
-        <button class="p-link">
-          <i class="pi pi-home"></i>
-        </button>
-        <button class="p-link">
-          <i class="pi pi-globe"></i>
-        </button>
-        <button class="p-link">
-          <i class="pi pi-envelope"></i>
-        </button>
-      </div>
+
+      <p>Desenvolvido pela SETIN</p>
     </div>
   </div>
 </template>
@@ -30,10 +34,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.layout-footer {
-  width: 100%;
-  margin: auto;
-  bottom: 0;
-}
-</style>

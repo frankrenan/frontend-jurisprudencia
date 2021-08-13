@@ -1,12 +1,5 @@
 import Vue from 'vue';
-const EventBus = new Vue({
-  methods: {
-    decisorioSelecionado(decisorio) {
-      this.$emit('decisorioSelecionado', decisorio)
-      console.log("eventBus")
-    }
-  }
-});
+const EventBus = new Vue();
 
 
 export default EventBus;

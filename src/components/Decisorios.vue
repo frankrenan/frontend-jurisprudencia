@@ -1,141 +1,74 @@
 <template>
-  <div class="p-mt-4 p-ml-6" style="width: 49%">
-    <h3>Decisorios</h3>
-
-    <Card class="card">
+  <div id="features">
+    <Card class="card p-card p-mb-6  p-ml-6" style="width: 75%">
       <template #title>
-        <div class="p-text-uppercase">Resultados:</div>
-        <hr />
+        <div style="text-align: left">Pesquisa de Decisórios</div>
       </template>
 
       <template #content>
-        <DataTable
-          :value="testando"
-          :selection.sync="selectedCostumers"
-          :paginator="true"
-          :loading="loading"
-          :rows="10"
-          class="p-datatable-responsive"
-          :rowHover="true"
-          selectionMode="single"
-          dataKey="id"
-          scrollHeight="200px"
-          :resizableColumns="true"
-
-        >
-          <Column field="name" header="Descrição">
-
-          </Column>
-          <Column field="assunto" header="Assunto"> </Column>
-
-          <template #loading> Procurando... </template>
-
-          <template #empty>
-            <span>Nao encontrado resultados...</span>
-          </template>
-        </DataTable>
+        <form class="p-card-body" style="width: 90%">
+          <div class="p-inputgroup">
+            <span class="p-input-icon-right p-float-label">
+              <i
+                style="cursor: pointer"
+                class="pi pi-search"
+                @click="realizarPesquisa"
+              />
+              <InputText
+                id="inputtext"
+                type="text"
+                v-model="campoPesquisa"
+                class="p-inputtext-lg"
+                @keyup.enter="realizarPesquisa"
+              />
+              <label for="inputtext">Pesquisar por</label>
+            </span>
+            <Button label="Buscar" @click="realizarPesquisa" />
+          </div>
+        </form>
       </template>
     </Card>
-
-    <!-- <iframe src="https://repositorio.ufsc.br/bitstream/handle/123456789/61448/TCC-Thales-final.pdf?sequence=1&isAllowed=y" width="600" height="780" style="border: none;"></iframe> -->
+    <div>
+      <DecisoriosLista :decisorios="this.dados" />
+    </div>
   </div>
 </template>
-
+  
 <script>
-import eventBus from "../event-bus";
+import DecisoriosLista from "./DecisoriosLista.vue";
+import Decisorios from "../service/Decisorios";
 
 export default {
   data() {
     return {
-      selectedCostumers: null,
-      decisorio: null,
-      loading: true,
-      testando: [
-        {
-          id: 1,
-          name: "Frank Renan Taveira Lima",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 2,
-          name: "Nayandra Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 3,
-          name: "Jose Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 4,
-          name: "Maria Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 5,
-          name: "Marcos Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 6,
-          name: "Fernando Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 7,
-          name: "Mario Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 8,
-          name: "Nivaldo Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 9,
-          name: "Marinaldo Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 10,
-          name: "Phelipe Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-        {
-          id: 11,
-          name: "Luiz Souza de Almeida",
-          assunto:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        },
-      ],
+      campoPesquisa: null,
+      pesquisar: false,
+      decisorioService: null,
+      dados: null,
     };
   },
-  mounted() {
-    this.loading = false;
-  },
-  watch: {
-    selectedCostumers() {
-      console.log(this.selectedCostumers);
-      this.decisorioSelecionado(this.selectedCostumers);
-    },
-  },
   methods: {
-    decisorioSelecionado(decisorio) {
-      eventBus.decisorioSelecionado(decisorio);
+    realizarPesquisa() {
+      this.$store.state.dlgLoading = true;
+      this.decisorioService
+        .getPesquisarDecisorio(this.campoPesquisa)
+        .then((data) => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+          }, 1000);
+          this.dados = data;
+        });
     },
+  },
+  components: {
+    DecisoriosLista,
+  },
+  created() {
+    this.decisorioService = new Decisorios();
   },
 };
 </script>
 
 <style scoped>
 </style>
+

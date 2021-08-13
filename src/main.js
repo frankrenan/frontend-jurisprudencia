@@ -6,6 +6,7 @@ import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 import Button from 'primevue/button';
 import Breadcrumb from 'primevue/breadcrumb';
+import BlockUI from 'primevue/blockui'
 import Calendar from 'primevue/calendar';
 import Card from 'primevue/card';
 import Carousel from 'primevue/carousel';
@@ -43,6 +44,7 @@ import PanelMenu from 'primevue/panelmenu';
 import Password from 'primevue/password';
 import PickList from 'primevue/picklist';
 import ProgressBar from 'primevue/progressbar';
+import ProgressSpinner from 'primevue/progressspinner';
 import Rating from 'primevue/rating';
 import RadioButton from 'primevue/radiobutton';
 import Ripple from 'primevue/ripple';
@@ -65,6 +67,7 @@ import Tree from 'primevue/tree';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 
+
 import 'primevue/resources/primevue.min.css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css'
@@ -77,8 +80,8 @@ Vue.use(ToastService);
 Vue.directive('Tooltip', Tooltip);
 Vue.directive('ripple', Ripple);
 
-Vue.prototype.$appState = Vue.observable({inputStyle: 'outlined'});
-Vue.prototype.$primevue = Vue.observable({ripple: true});
+Vue.prototype.$appState = Vue.observable({ inputStyle: 'outlined' });
+Vue.prototype.$primevue = Vue.observable({ ripple: true });
 
 Vue.config.productionTip = false;
 
@@ -86,6 +89,7 @@ Vue.component('Accordion', Accordion);
 Vue.component('AccordionTab', AccordionTab);
 Vue.component('AutoComplete', AutoComplete);
 Vue.component('Breadcrumb', Breadcrumb);
+Vue.component('BlockUI', BlockUI);
 Vue.component('Button', Button);
 Vue.component('Calendar', Calendar);
 Vue.component('Card', Card);
@@ -124,6 +128,7 @@ Vue.component('PanelMenu', PanelMenu);
 Vue.component('Password', Password);
 Vue.component('PickList', PickList);
 Vue.component('ProgressBar', ProgressBar);
+Vue.component('ProgressSpinner', ProgressSpinner);
 Vue.component('RadioButton', RadioButton);
 Vue.component('Rating', Rating);
 Vue.component('SelectButton', SelectButton);
@@ -147,11 +152,13 @@ import Access from './pages/Access';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
+import store from '@/store/store';
 
 new Vue({
+	store,
 	el: '#app',
 	computed: {
-		ViewComponent () {
+		ViewComponent() {
 			switch (this.$route.path) {
 				case '/login':
 					return Login;
@@ -167,5 +174,5 @@ new Vue({
 		}
 	},
 	router,
-	render (h) { return h(this.ViewComponent) }
+	render(h) { return h(this.ViewComponent) }
 });
