@@ -1,37 +1,38 @@
 <template>
-	<div class="login-body">
+  <div class="login-body">
+    <div class="login-panel"></div>
 
-		<div class="login-panel"></div>
+    <div class="login-content">
+      <img src="../assets/logo-principal.png" alt="babylon-layout" />
 
-		<div class="login-content">
-			<img src="assets/layout/images/logo-black.png" alt="babylon-layout"/>
+      <h1><span>ENTRE</span> NO CONSULTA DE DECISÓRIOS</h1>
+      <p>Bem vindo, por favor, preencha o formulário de login.</p>
 
-			<h1><span>SIGN IN</span> TO BABYLON</h1>
-			<p>Welcome, please use the form to sign-in.</p>
+      <div class="login-input-wrapper">
+        <InputText placeholder="Digite seu usuário: Ex. frank.lima" />
+      </div>
 
-			<div class="login-input-wrapper">
-				<InputText placeholder="Username"/>
-			</div>
+      <div class="login-input-wrapper">
+        <InputText type="password" placeholder="Digite sua senha: Ex. frank@lima" />
+      </div>
 
-			<div class="login-input-wrapper">
-				<InputText type="password" placeholder="Password"/>
-			</div>
+      <Button label="Entrar" class="p-mb-4" icon="pi pi-check" @click="goDashboard" />
 
-			<Button label="Sign In" icon="pi pi-check" @click="goDashboard"/>
-		</div>
-	</div>
+			<p>Caso não tenha acesso<a href="#"> clique aqui!</a></p>
+    </div>
+		
+  </div>
 </template>
 
 <script>
-	export default {
-		methods: {
-			goDashboard(){
-				window.location = "/#/"
-			}
-		}
-	}
+export default {
+  methods: {
+    goDashboard() {
+      window.location = "/#/";
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

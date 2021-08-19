@@ -11,19 +11,18 @@
             <div class="p-col-12 p-md-6 p-lg-3">
               <span>SUPORTE</span>
 
-              <a href="#home">Home</a>
+              <div v-for="(item, i) in items" :key="i">
+                <router-link v-if="item.to" :to="item.to">
+                  <a>{{item.label}}</a>
+                </router-link>
+              </div>
 
-              <a href="#decisorios">Decisórios</a>
-
-              <a href="#faleConosco">Fale Conosco</a>
-
-              <!-- <a href="#forum">Forum</a> -->
             </div>
           </div>
         </div>
       </div>
 
-      <p>Desenvolvido pela SETIN</p>
+      <p>Desenvolvido por: Frank Renan</p>
     </div>
   </div>
 </template>
@@ -31,6 +30,12 @@
 <script>
 export default {
   name: "AppFooter",
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 
