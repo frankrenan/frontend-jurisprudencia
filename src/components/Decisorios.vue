@@ -1,6 +1,6 @@
 <template>
   <div id="features">
-    <Card class="card p-card p-mb-6  p-ml-6" style="width: 75%">
+    <Card class="card p-card p-mb-6 p-ml-6" style="width: 75%">
       <template #title>
         <div style="text-align: left">Pesquisa de Decisórios</div>
       </template>
