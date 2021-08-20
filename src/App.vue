@@ -9,7 +9,7 @@
             <router-view />
           </div>
         </div>
-        <AppFooter />
+        <AppFooter :items="items" />
       </div>
     </div>
   </div>
@@ -36,6 +36,7 @@ export default {
       { label: "Home", icon: "pi pi-fw pi-home", to: "/" },
       { label: "Decisórios", icon: "pi pi-file-o", to: "/decisorios" },
       { label: "Fale Conosco", icon: "pi pi-question", to: "/faleConosco" },
+      { label: "Sair", icon: "pi pi-sign-out", to: "/login" },
     ];
   },
 };

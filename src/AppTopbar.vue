@@ -2,13 +2,13 @@
   <div id="header">
     <div class="header-top" style="display: flex; align-items: stretch">
       <img
-        src="../src/assets/logo-amazonas.png"
+        src="../src/assets/logo-tce.png"
         alt="Tribunal de contas - logo"
-        style="width: 50px; height: 100%"
+        style="width: 50%; height: 100%"
       />
-      <h2>Tribunal de Contas do Amazonas</h2>
+      <!-- <h2>Tribunal de Contas do Amazonas</h2> -->
 
-      <ul id="landing-menu" style="margin-left: 45%">
+      <ul id="landing-menu" style="margin-left: 20%">
         <li v-for="(item, i) in items" :key="item.label || i">
           <router-link v-if="item.to" :to="item.to">
             <i :class="item.icon"></i>
