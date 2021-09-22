@@ -17,7 +17,6 @@
 
 <script>
 import AppTopbar from "./AppTopbar.vue";
-import Decisorios from "./components/Decisorios.vue";
 import AppFooter from "./AppFooter.vue";
 
 export default {
@@ -28,12 +27,11 @@ export default {
   },
   components: {
     AppTopbar,
-    Decisorios,
     AppFooter,
   },
   created() {
     this.items = [
-      { label: "Home", icon: "pi pi-fw pi-home", to: "/" },
+      { label: "Home", icon: "pi pi-fw pi-home", to: "/home" },
       { label: "Decisórios", icon: "pi pi-file-o", to: "/decisorios" },
       { label: "Fale Conosco", icon: "pi pi-question", to: "/faleConosco" },
       { label: "Sair", icon: "pi pi-sign-out", to: "/login" },

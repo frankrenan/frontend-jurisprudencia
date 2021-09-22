@@ -9,7 +9,7 @@
       <p>Bem vindo, por favor, preencha o formulário de login.</p>
 
       <div class="login-input-wrapper">
-        <InputText placeholder="Digite seu usuário: Ex. frank.lima" />
+        <InputText placeholder="Digite seu CPF: Ex. 03207394221" />
       </div>
 
       <div class="login-input-wrapper">
@@ -28,7 +28,7 @@
 export default {
   methods: {
     goDashboard() {
-      window.location = "/#/";
+      window.location = "/#/home";
     },
   },
 };

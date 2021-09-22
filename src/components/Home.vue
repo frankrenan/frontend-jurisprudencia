@@ -3,7 +3,7 @@
     <div class="p-grid">
       <div class="p-col-12 p-md-12 p-lg-4">
         <div class="feature-box">
-          <router-link to="/">
+          <router-link to="/home">
             <h3>Home</h3>
             <p>Faça sua busca de decisório</p>
           </router-link>

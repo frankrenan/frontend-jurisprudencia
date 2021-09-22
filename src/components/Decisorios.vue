@@ -36,7 +36,6 @@
   
 <script>
 import DecisoriosLista from "./DecisoriosLista.vue";
-import Decisorios from "../service/Decisorios";
 
 export default {
   data() {
@@ -50,14 +49,6 @@ export default {
   methods: {
     realizarPesquisa() {
       this.$store.state.dlgLoading = true;
-      this.decisorioService
-        .getPesquisarDecisorio(this.campoPesquisa)
-        .then((data) => {
-          setTimeout(() => {
-            this.$store.state.dlgLoading = false;
-          }, 1000);
-          this.dados = data;
-        });
     },
   },
   components: {

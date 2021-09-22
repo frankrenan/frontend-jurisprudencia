@@ -6,22 +6,22 @@ Vue.use(Router);
 export default new Router({
 	routes: [
 		{
-			path: '/',
-			name: 'decisorios',
+			path: "/home",
+			name: "paginaInicial",
 			exact: true,
-			component: () => import('./components/Home.vue')
+			component: () => import('@/components/Home.vue')
 		},
 		{
 			path: '/decisorios',
 			name: 'decisorioSelecionado',
 			exact: true,
-			component: () => import('./components/Decisorios.vue')
+			component: () => import('@/components/Decisorios.vue')
 		},
 		{
 			path: '/faleConosco',
 			name: 'faleConosco',
 			exact: true,
-			component: () => import('./components/FaleConosco.vue')
+			component: () => import('@/components/FaleConosco.vue')
 		},
 		{
 			path: '/',
@@ -31,7 +31,13 @@ export default new Router({
 			path: '/login',
 			name: 'login',
 			exact: true,
-			component: () => import('./pages/Login.vue')
+			component: () => import('@/pages/Login.vue')
+		},
+		{
+			path: '/administrador',
+			name: 'administrador',
+			exact: true,
+			component: () => import('@/pages/Administrador.vue')
 		}
 	],
 	scrollBehavior() {
