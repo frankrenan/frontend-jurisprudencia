@@ -8,7 +8,9 @@ export default new Vuex.Store({
     dlgLoading: false,
     dlgCadastrarUsuario: false,
     dlgConsultarUsuario: false,
-    
+    dlgAlterarUsuario: false,
+    dlgDeletarUsuario: false
+
   },
   getters: {
   },
@@ -16,13 +18,21 @@ export default new Vuex.Store({
     setDlgLoading(state, payload) {
       state.dlgLoading = payload
     },
-    
-    setDlgLoading(state, payload) {
+
+    setDlgCadastrarUsuario(state, payload) {
       state.dlgCadastrarUsuario = payload
     },
 
-    setDlgLoading(state, payload) {
+    setDlgConsultarUsuario(state, payload) {
       state.dlgConsultarUsuario = payload
+    },
+
+    setDlgAlterarUsuario(state, payload) {
+      state.dlgAlterarUsuario = payload
+    },
+
+    setDlgDeletarUsuario(state, payload) {
+      state.dlgDeletarUsuario = payload
     },
   },
 })

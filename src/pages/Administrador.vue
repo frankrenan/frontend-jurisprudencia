@@ -9,7 +9,6 @@
         <Menubar :model="items">
           <template #end>
             <InputText placeholder="Search" type="text" />
-            <!-- <Button label="Sair" icon="pi pi-power-off" :style="{'margin-left': '0 .5em'}"/> -->
           </template>
         </Menubar>
       </template>
@@ -79,7 +78,7 @@ export default {
   },
 
   created() {
-    console.log(this.$route.fullPath);
+    // console.log(this.$route.fullPath);
   },
 
   computed: {

@@ -7,6 +7,10 @@
     <Card class="p-card card">
       <template #header>
         <h1>Consultar Usuário</h1>
+        <small
+          >Realiza a consulta de todos os usuários do sistema de
+          jurisprudencia</small
+        >
       </template>
 
       <template #content>

@@ -7,6 +7,9 @@
     <Card class="p-card card">
       <template #header>
         <h1>Cadastrar Usuário</h1>
+        <small
+          >Realiza o cadastro do usuário no sistema de jurisprudência</small
+        >
       </template>
 
       <template #content>
@@ -41,8 +44,13 @@
       </template>
     </Card>
     <template #footer>
-      <Button label="Cadastrar" autofocus @click="cadastrarUsuario" />
-      <Button label="Cancelar" @click="fecharDialog" />
+      <Button
+        label="Salvar"
+        icon="pi pi-save"
+        autofocus
+        @click="cadastrarUsuario"
+      />
+      <Button label="Cancelar" icon="pi pi-times" @click="fecharDialog" />
     </template>
   </Dialog>
 </template>
