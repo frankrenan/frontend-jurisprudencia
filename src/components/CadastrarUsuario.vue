@@ -3,6 +3,7 @@
     :visible.sync="dlgCadastrarUsuario"
     :closable="false"
     :maximizable="true"
+    :style="{ width: '50vw' }"
   >
     <Card class="p-card card">
       <template #header>
@@ -17,9 +18,9 @@
           <div class="p-col-6">
             <div class="p-inputgroup">
               <span class="p-input-icon-right p-float-label">
-                <InputText
+                <InputMask
                   id="inputtext"
-                  type="text"
+                  mask="999.999.999-99"
                   v-model="usuario.cpf"
                   class="p-inputtext-lg"
                 />
@@ -52,11 +53,14 @@
       />
       <Button label="Cancelar" icon="pi pi-times" @click="fecharDialog" />
     </template>
+    <Loading />
+    <Toast />
   </Dialog>
 </template>
 
 <script>
 import { api } from "../services";
+import Loading from "@/pages/Loading.vue";
 
 export default {
   data() {
@@ -80,12 +84,36 @@ export default {
     },
 
     cadastrarUsuario() {
+      this.$store.state.dlgLoading = true;
       api
         .post("/usuario", this.usuario)
-        .then((data) => console.log(data.data))
-        .catch((error) => console.log(error));
+        .then(() => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+            this.$toast.add({
+              severity: "success",
+              summary: "Sucesso",
+              detail: "Cadastrado com sucesso!",
+              life: 3000,
+            });
+          }, 2000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+            this.$toast.add({
+              severity: "error",
+              summary: "Erro!",
+              detail: "Deu algum erro!",
+              life: 3000,
+            });
+          }, 2000);
+        });
     },
   },
+  components: {
+    Loading
+  }
 };
 </script>
 

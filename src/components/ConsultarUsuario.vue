@@ -3,6 +3,7 @@
     :visible.sync="dlgConsultarUsuario"
     :closable="false"
     :maximizable="true"
+    :style="{ width: '50vw' }"
   >
     <Card class="p-card card">
       <template #header>
@@ -34,11 +35,13 @@
       <!-- <Button label="Cadastrar" autofocus @click="cadastrarUsuario" /> -->
       <Button label="Cancelar" @click="fecharDialog" />
     </template>
+    <Loading />
   </Dialog>
 </template>
 
 <script>
 import { api } from "../services";
+import Loading from "@/pages/Loading.vue";
 
 export default {
   data() {
@@ -47,13 +50,20 @@ export default {
       columns: Array,
     };
   },
+
   created() {
-    api
-      .get("/usuarios")
-      .then((data) => {
-        this.usuarios = data.data;
-      })
-      .catch((error) => console.error(error));
+    this.$store.state.dlgLoading = true;
+    setTimeout(() => {
+      api
+        .get("/usuarios")
+        .then((data) => {
+          this.usuarios = data.data;
+          this.$store.state.dlgLoading = false;
+        })
+        .catch(() => {
+          this.$store.state.dlgLoading = false;
+        });
+    }, 1000);
 
     this.columns = [
       { field: "cpf", header: "CPF" },
@@ -72,6 +82,10 @@ export default {
     fecharDialog() {
       this.$store.state.dlgConsultarUsuario = false;
     },
+  },
+
+  components: {
+    Loading,
   },
 };
 </script>

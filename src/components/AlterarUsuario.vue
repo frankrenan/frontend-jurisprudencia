@@ -3,6 +3,7 @@
     :visible.sync="dlgAlterarUsuario"
     :closable="false"
     :maximizable="true"
+    :style="{ width: '50vw' }"
   >
     <Card class="p-card card">
       <template #header>
@@ -15,9 +16,9 @@
           <div class="p-col-6">
             <div class="p-inputgroup">
               <span class="p-input-icon-right p-float-label">
-                <InputText
+                <InputMask
                   id="inputtext"
-                  type="text"
+                  mask="999.999.999-99"
                   v-model="usuario.cpf"
                   class="p-inputtext-lg"
                 />
@@ -45,11 +46,14 @@
       <Button label="Salvar" icon="pi pi-save" @click="alterarUsuario" />
       <Button label="Cancelar" icon="pi pi-times" @click="fecharDialog" />
     </template>
+    <Toast />
+    <Loading />
   </Dialog>
 </template>
 
 <script>
 import { api } from "../services";
+import Loading from "@/pages/Loading.vue";
 
 export default {
   data() {
@@ -73,13 +77,35 @@ export default {
     },
 
     alterarUsuario() {
+      this.$store.state.dlgLoading = true;
       api
         .put("/usuario", this.usuario)
-        .then((data) => {
-          console.log(`Usuario ${data} alterado com sucesso !`);
+        .then(() => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+            this.$toast.add({
+              severity: "success",
+              summary: "Sucesso",
+              detail: "Alterado com sucesso!",
+              life: 3000,
+            });
+          }, 2000);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+            this.$toast.add({
+              severity: "error",
+              summary: "Erro!",
+              detail: "Deu algum erro!",
+              life: 3000,
+            });
+          }, 2000);
+        });
     },
+  },
+  components: {
+    Loading,
   },
 };
 </script>
