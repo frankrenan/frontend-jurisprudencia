@@ -1,41 +1,38 @@
 <template>
-  <Dialog
-    :visible.sync="dlgDeletarUsuario"
-    :closable="false"
-    :maximizable="true"
-    :style="{ width: '50vw' }"
-  >
-    <Card class="p-card card">
-      <template #header>
-        <h1>Deletar Usuário</h1>
-        <small>Deletar o usuário</small>
-      </template>
+  <div>
+    <Dialog
+      :visible.sync="dlgDeletarUsuario"
+      :closable="false"
+      :maximizable="true"
+      :style="{ width: '450px' }"
+      header="Confirmar Exclusão?"
+    >
+      <div>
+        <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
+        <span v-if="usuario"
+          >Deseja mesmo excluir o CPF: <b>{{ usuario.cpf }}</b
+          >?</span
+        >
+      </div>
 
-      <template #content>
-        <div class="p-grid">
-          <div class="p-col-12">
-            <div class="p-inputgroup">
-              <span class="p-input-icon-right p-float-label">
-                <InputMask
-                  id="inputtext"
-                  v-model="cpf"
-                  mask="999.999.999-99"
-                  class="p-inputtext-lg"
-                />
-                <label for="inputtext">CPF:</label>
-              </span>
-            </div>
-          </div>
-        </div>
+      <template #footer>
+        <Button
+          label="Não"
+          class="p-button-text"
+          icon="pi pi-times"
+          @click="fecharDialog"
+        />
+        <Button
+          label="Sim"
+          class="p-button-text"
+          icon="pi pi-trash"
+          @click="deletarUsuario"
+        />
       </template>
-    </Card>
-    <template #footer>
-      <Button label="Excluir" icon="pi pi-trash" @click="deletarUsuario" />
-      <Button label="Cancelar" icon="pi pi-times" @click="fecharDialog" />
-    </template>
+    </Dialog>
     <Toast />
     <Loading />
-  </Dialog>
+  </div>
 </template>
 
 <script>
@@ -43,10 +40,17 @@ import { api } from "../services";
 import Loading from "@/pages/Loading.vue";
 
 export default {
-  data() {
-    return {
-      cpf: "",
-    };
+  // data() {
+  //   return {
+  //     cpf: "",
+  //   };
+  // },
+
+  props: {
+    usuario: {
+      type: Object,
+      required: true,
+    },
   },
 
   computed: {
@@ -61,11 +65,9 @@ export default {
     },
 
     deletarUsuario() {
-      // console.log(this.cpf.match(/[0-9]/g));
       this.$store.state.dlgLoading = true;
-
       api
-        .delete(`/usuario/${this.cpf}`)
+        .delete(`/usuario/${this.usuario.cpf}`)
         .then(() => {
           setTimeout(() => {
             this.$store.state.dlgLoading = false;
@@ -75,6 +77,7 @@ export default {
               detail: "Usuário deletado com sucesso!",
               life: 3000,
             });
+            this.$store.state.dlgDeletarUsuario = false;
           }, 2000);
         })
         .catch(() => {
@@ -86,6 +89,7 @@ export default {
               detail: "Erro ao deletar usuário!",
               life: 3000,
             });
+            this.$store.state.dlgDeletarUsuario = false;
           }, 2000);
         });
     },

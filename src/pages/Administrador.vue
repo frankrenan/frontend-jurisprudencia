@@ -15,7 +15,7 @@
 
       <template #content>
         <form class="p-card-body" style="width: 90%">
-          <keep-alive>
+          <keep-alive >
             <components :is="opcao" v-bind="propsGeral" />
           </keep-alive>
         </form>
@@ -27,8 +27,8 @@
 <script>
 import CadastrarUsuario from "@/components/CadastrarUsuario.vue";
 import AlterarUsuario from "@/components/AlterarUsuario.vue";
-import ConsultarUsuario from "@/components/ConsultarUsuario.vue";
 import DeletarUsuario from "@/components/DeletarUsuario.vue";
+import Usuario from "@/components/Usuario.vue";
 
 export default {
   data() {
@@ -38,10 +38,17 @@ export default {
         {
           label: "Usuários",
           icon: "pi pi-fw pi-user",
+          command: () => {
+            this.opcao = "Usuario";
+          },
+        },
+        {
+          label: "Processos",
+          icon: "pi pi-fw pi-clone",
           items: [
             {
               label: "Novo",
-              icon: "pi pi-fw pi-user-plus",
+              icon: "pi pi-fw pi-file",
               command: () => {
                 this.opcao = "CadastrarUsuario";
                 this.$store.state.dlgCadastrarUsuario = true;
@@ -49,7 +56,7 @@ export default {
             },
             {
               label: "Alterar",
-              icon: "pi pi-fw pi-user-edit",
+              icon: "pi pi-fw pi-pencil",
               command: () => {
                 this.opcao = "AlterarUsuario";
                 this.$store.state.dlgAlterarUsuario = true;
@@ -57,7 +64,7 @@ export default {
             },
             {
               label: "Consultar",
-              icon: "pi pi-fw pi-users",
+              icon: "pi pi-fw pi-copy",
               command: () => {
                 this.opcao = "ConsultarUsuario";
                 this.$store.state.dlgConsultarUsuario = true;
@@ -65,7 +72,7 @@ export default {
             },
             {
               label: "Deletar",
-              icon: "pi pi-fw pi-user-minus",
+              icon: "pi pi-fw pi-file-excel",
               command: () => {
                 this.opcao = "DeletarUsuario";
                 this.$store.state.dlgDeletarUsuario = true;
@@ -83,15 +90,15 @@ export default {
 
   computed: {
     propsGeral() {
-      return this.opcao ? { opcao: this.opcao } : {};
+      // return this.opcao ? { opcao: this.opcao } : {};
     },
   },
 
   components: {
     CadastrarUsuario,
     AlterarUsuario,
-    ConsultarUsuario,
     DeletarUsuario,
+    Usuario,
   },
 };
 </script>
