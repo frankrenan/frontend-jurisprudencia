@@ -15,8 +15,8 @@
 
       <template #content>
         <form class="p-card-body" style="width: 90%">
-          <keep-alive >
-            <components :is="opcao" v-bind="propsGeral" />
+          <keep-alive exclude="Usuario">
+            <components :is="opcao" />
           </keep-alive>
         </form>
       </template>
@@ -28,7 +28,9 @@
 import CadastrarUsuario from "@/components/CadastrarUsuario.vue";
 import AlterarUsuario from "@/components/AlterarUsuario.vue";
 import DeletarUsuario from "@/components/DeletarUsuario.vue";
+import CadastrarProcesso from "@/components/CadastrarProcesso.vue";
 import Usuario from "@/components/Usuario.vue";
+import Processo from "@/components/Processo.vue";
 
 export default {
   data() {
@@ -45,40 +47,9 @@ export default {
         {
           label: "Processos",
           icon: "pi pi-fw pi-clone",
-          items: [
-            {
-              label: "Novo",
-              icon: "pi pi-fw pi-file",
-              command: () => {
-                this.opcao = "CadastrarUsuario";
-                this.$store.state.dlgCadastrarUsuario = true;
-              },
-            },
-            {
-              label: "Alterar",
-              icon: "pi pi-fw pi-pencil",
-              command: () => {
-                this.opcao = "AlterarUsuario";
-                this.$store.state.dlgAlterarUsuario = true;
-              },
-            },
-            {
-              label: "Consultar",
-              icon: "pi pi-fw pi-copy",
-              command: () => {
-                this.opcao = "ConsultarUsuario";
-                this.$store.state.dlgConsultarUsuario = true;
-              },
-            },
-            {
-              label: "Deletar",
-              icon: "pi pi-fw pi-file-excel",
-              command: () => {
-                this.opcao = "DeletarUsuario";
-                this.$store.state.dlgDeletarUsuario = true;
-              },
-            },
-          ],
+          command: () => {
+            this.opcao = "Processo";
+          },
         },
       ],
     };
@@ -99,6 +70,8 @@ export default {
     AlterarUsuario,
     DeletarUsuario,
     Usuario,
+    Processo,
+    CadastrarProcesso,
   },
 };
 </script>

@@ -4,7 +4,7 @@
     <Toolbar class="p-mb-4">
       <template #left>
         <Button
-          label="Novo"
+          label="Novo Usuário"
           icon="pi pi-fw pi-user-plus"
           class="p-button-success p-mr-2"
           @click="cadastrarUsuario"
@@ -24,13 +24,14 @@
     <DataTable
       :value="usuarios"
       ref="dt"
-      class="p-datatable-sm"
-      :selection.sync="selectedUser"
+      class="p-datatable-responsive"
+      columnResizeMode="fit"
       dataKey="cpf"
       :filters="filters"
       :paginator="true"
       :rows="10"
-      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+      :loading="loading"
+      :resizableColumns="true"
       :rowsPerPageOptions="[5, 10, 25]"
       currentPageReportTemplate="Mostrando {first} de {last} com {totalRecords} usuarios"
     >
@@ -38,7 +39,11 @@
         <div class="table-header">
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
-            <InputMask mask="999.999.999-99" v-model="filters['global']" placeholder="Pesquise..." />
+            <InputMask
+              mask="999.999.999-99"
+              v-model="filters['global']"
+              placeholder="Pesquise..."
+            />
           </span>
         </div>
       </template>
@@ -89,23 +94,29 @@ export default {
       usuarios: null,
       usuario: {},
       opcao: null,
-      selectedUser: null,
+      loading: false,
       filters: {},
       columns: Array,
     };
   },
 
   created() {
-    this.$store.state.dlgLoading = true;
+    this.loading = true;
     setTimeout(() => {
       api
         .get("/usuarios")
         .then((data) => {
           this.usuarios = data.data;
-          this.$store.state.dlgLoading = false;
+          this.loading = false;
         })
         .catch(() => {
-          this.$store.state.dlgLoading = false;
+          this.loading = false;
+          this.$toast.add({
+            severity: "error",
+            summary: "Erro!",
+            detail: "Deu algum erro!",
+            life: 3000,
+          });
         });
     }, 1000);
 
@@ -149,11 +160,7 @@ export default {
     },
   },
 
-  watch: {
-    selectedUser() {
-      console.log(this.selectedUser);
-    },
-  },
+  watch: {},
 
   components: {
     Loading,
