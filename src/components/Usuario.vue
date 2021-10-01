@@ -43,8 +43,6 @@
         </div>
       </template>
 
-      <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-
       <Column
         v-for="col of columns"
         :field="col.field"
