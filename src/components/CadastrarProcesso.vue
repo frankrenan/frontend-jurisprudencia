@@ -20,7 +20,7 @@
               <div class="p-inputgroup">
                 <span class="p-input-icon-right p-float-label">
                   <InputNumber
-                    v-model="numero"
+                    v-model="processo.numero"
                     class="input"
                     mode="decimal"
                     :useGrouping="false"
@@ -30,12 +30,12 @@
               </div>
             </div>
 
-            <div class="p-col-2">
+            <div class="p-col-4">
               <div class="p-inputgroup">
                 <span class="p-input-icon-right p-float-label">
                   <InputNumber
                     showButtons
-                    v-model="ano"
+                    v-model="processo.ano"
                     :min="1900"
                     :max="anoAtual"
                     :useGrouping="false"
@@ -49,7 +49,7 @@
               <div class="p-col-8 p-mt-4">
                 <span class="p-input-icon-right p-float-label">
                   <Textarea
-                    v-model="natureza"
+                    v-model="processo.natureza"
                     :autoResize="true"
                     rows="3"
                     cols="90"
@@ -63,7 +63,7 @@
               <div class="p-col-8 p-mt-4">
                 <span class="p-input-icon-right p-float-label">
                   <Textarea
-                    v-model="especie"
+                    v-model="processo.especie"
                     :autoResize="true"
                     rows="3"
                     cols="90"
@@ -77,7 +77,7 @@
               <div class="p-col-8 p-mt-4">
                 <span class="p-input-icon-right p-float-label">
                   <Textarea
-                    v-model="objeto"
+                    v-model="processo.objeto"
                     :autoResize="true"
                     rows="5"
                     cols="90"
@@ -87,11 +87,11 @@
               </div>
             </div>
 
-            <div class="p-col-2 p-mt-4">
+            <div class="p-col-4 p-mt-4">
               <div class="p-inputgroup">
                 <span class="p-input-icon-right p-float-label">
                   <InputNumber
-                    v-model="numeroPagina"
+                    v-model="processo.numeroPagina"
                     class="input"
                     mode="decimal"
                     :useGrouping="false"
@@ -126,13 +126,19 @@
 
 <script>
 import Loading from "@/pages/Loading.vue";
+import { api } from "../services";
 export default {
   data() {
     return {
-      numero: null,
       anoAtual: new Date().getFullYear(),
-      ano: new Date().getFullYear(),
-      objeto: "",
+      processo: {
+        numero: null,
+        ano: new Date().getFullYear(),
+        objeto: "",
+        natureza: "",
+        especie: "",
+        numeroPagina: undefined,
+      },
     };
   },
 
@@ -148,7 +154,31 @@ export default {
     },
 
     cadastrarProcesso() {
-      console.log("Hellow");
+      this.$store.state.dlgLoading = true;
+      api
+        .post("/processo", this.processo)
+        .then(() => {
+          setTimeout(() => {
+            this.$toast.add({
+              severity: "sucess",
+              summary: "Sucesso",
+              detail: "Processo cadastrado com sucesso!",
+              life: 3000,
+            });
+            this.$store.state.dlgLoading = false;
+          }, 2000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            this.$toast.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Ocorreu um problema ao cadastrar!",
+              life: 3000,
+            });
+            this.$store.state.dlgLoading = false;
+          }, 2000);
+        });
     },
   },
 
