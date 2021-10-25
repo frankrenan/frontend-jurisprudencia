@@ -94,7 +94,6 @@
                     v-model="numeroPagina"
                     class="input"
                     mode="decimal"
-                    :useGrouping="false"
                   />
                   <label for="inputtext">Número de página:</label>
                 </span>
@@ -126,13 +125,17 @@
 
 <script>
 import Loading from "@/pages/Loading.vue";
+import { api } from "../services.js";
 export default {
   data() {
     return {
-      numero: null,
+        numero: null,
+        ano: new Date().getFullYear(),
+        natureza: "",
+        especie: "",
+        objeto: "",
+        numeroPagina: null,
       anoAtual: new Date().getFullYear(),
-      ano: new Date().getFullYear(),
-      objeto: "",
     };
   },
 
@@ -148,7 +151,35 @@ export default {
     },
 
     cadastrarProcesso() {
-      console.log("Hellow");
+      console.log(this.processo)
+    
+      this.$store.state.dlgLoading = true;
+      api
+        .post("/processo", {numero: this.numero, ano: this.ano, natureza: this.natureza, especie: this.especie, objeto: this.objeto, numeroPagina: this.numeroPagina})
+        .then(() => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+            this.$toast.add({
+              severity: "success",
+              summary: "Sucesso",
+              detail: "Cadastrado com sucesso!",
+              life: 3000,
+            });
+            this.$store.state.dlgCadastrarProcesso = false;
+          }, 2000);
+        })
+        .catch(() => {
+          setTimeout(() => {
+            this.$store.state.dlgLoading = false;
+            this.$toast.add({
+              severity: "error",
+              summary: "Erro!",
+              detail: "Deu algum erro!",
+              life: 3000,
+            });
+            this.$store.state.dlgCadastrarProcesso = false;
+          }, 2000);
+        });
     },
   },
 

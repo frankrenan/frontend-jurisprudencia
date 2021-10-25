@@ -95,7 +95,7 @@ export default {
       { field: "natureza", header: "Natureza" },
       { field: "especie", header: "Especie" },
       { field: "objeto", header: "Objeto" },
-      { field: "numero_paginas", header: "Número de Páginas" },
+      { field: "numeroPaginas", header: "Número de Páginas" },
     ];
   },
   methods: {
