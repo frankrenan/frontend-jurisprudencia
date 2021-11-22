@@ -20,7 +20,7 @@
               <div class="p-inputgroup">
                 <span class="p-input-icon-right p-float-label">
                   <InputNumber
-                    v-model="processo.numero"
+                    v-model="numero"
                     class="input"
                     mode="decimal"
                     :useGrouping="false"
@@ -35,7 +35,7 @@
                 <span class="p-input-icon-right p-float-label">
                   <InputNumber
                     showButtons
-                    v-model="processo.ano"
+                    v-model="ano"
                     :min="1900"
                     :max="anoAtual"
                     :useGrouping="false"
@@ -49,7 +49,7 @@
               <div class="p-col-8 p-mt-4">
                 <span class="p-input-icon-right p-float-label">
                   <Textarea
-                    v-model="processo.natureza"
+                    v-model="natureza"
                     :autoResize="true"
                     rows="3"
                     cols="90"
@@ -63,7 +63,7 @@
               <div class="p-col-8 p-mt-4">
                 <span class="p-input-icon-right p-float-label">
                   <Textarea
-                    v-model="processo.especie"
+                    v-model="especie"
                     :autoResize="true"
                     rows="3"
                     cols="90"
@@ -77,7 +77,7 @@
               <div class="p-col-8 p-mt-4">
                 <span class="p-input-icon-right p-float-label">
                   <Textarea
-                    v-model="processo.objeto"
+                    v-model="objeto"
                     :autoResize="true"
                     rows="5"
                     cols="90"
@@ -91,7 +91,7 @@
               <div class="p-inputgroup">
                 <span class="p-input-icon-right p-float-label">
                   <InputNumber
-                    v-model="processo.numeroPagina"
+                    v-model="numeroPagina"
                     class="input"
                     mode="decimal"
                   />
@@ -130,14 +130,12 @@ export default {
   data() {
     return {
       anoAtual: new Date().getFullYear(),
-      processo: {
-        numero: null,
-        ano: new Date().getFullYear(),
-        objeto: "",
-        natureza: "",
-        especie: "",
-        numeroPagina: undefined,
-      },
+      numero: null,
+      ano: new Date().getFullYear(),
+      objeto: "",
+      natureza: "",
+      especie: "",
+      numeroPagina: undefined,
     };
   },
 
@@ -155,7 +153,14 @@ export default {
     cadastrarProcesso() {
       this.$store.state.dlgLoading = true;
       api
-        .post("/processo", this.processo)
+        .post("/api/v1/processo", {
+          numero: this.numero,
+          ano: this.ano,
+          natureza: this.natureza,
+          especie: this.especie,
+          objeto: this.objeto,
+          numeroPaginas: this.numeroPagina,
+        })
         .then(() => {
           setTimeout(() => {
             this.$toast.add({

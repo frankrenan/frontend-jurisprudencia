@@ -22,7 +22,7 @@
     </Toolbar>
 
     <DataTable
-      :value="usuarios"
+      :value="advogados"
       ref="dt"
       class="p-datatable-responsive"
       columnResizeMode="fit"
@@ -91,7 +91,7 @@ import AlterarUsuario from "@/components/AlterarUsuario.vue";
 export default {
   data() {
     return {
-      usuarios: null,
+      advogados: null,
       usuario: {},
       opcao: null,
       loading: false,
@@ -104,9 +104,9 @@ export default {
     this.loading = true;
     setTimeout(() => {
       api
-        .get("/usuarios")
+        .get("/api/v1/advogado")
         .then((data) => {
-          this.usuarios = data.data;
+          this.advogados = data.data;
           this.loading = false;
         })
         .catch(() => {
@@ -114,7 +114,7 @@ export default {
           this.$toast.add({
             severity: "error",
             summary: "Erro!",
-            detail: "Deu algum erro!",
+            detail: "Erro!",
             life: 3000,
           });
         });
@@ -122,8 +122,10 @@ export default {
 
     this.columns = [
       { field: "cpf", header: "CPF" },
-      { field: "created_at", header: "Data de Criação" },
-      { field: "updated_at", header: "Última atualização" },
+      { field: "nome", header: "Nome" },
+      { field: "email", header: "E-mail" },
+      { field: "oab", header: "Oab" },
+      { field: "estado", header: "Estado" },
     ];
   },
 
@@ -144,7 +146,7 @@ export default {
     },
 
     alterarUsuario(usuario) {
-      this.usuario = usuario.cpf;
+      this.usuario = {... usuario};
       this.opcao = "AlterarUsuario";
       this.$store.state.dlgAlterarUsuario = true;
     },

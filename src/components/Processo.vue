@@ -81,7 +81,7 @@ export default {
   },
   created() {
     api
-      .get("/processo")
+      .get("/api/v1/processo")
       .then((data) => {
         this.processos = data.data;
       })

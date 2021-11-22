@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    usuario: null,
     dlgLoading: false,
     dlgCadastrarUsuario: false,
     dlgAlterarUsuario: false,
@@ -15,6 +16,10 @@ export default new Vuex.Store({
   getters: {
   },
   mutations: {
+    setUsuario(state, payload) {
+      state.usuario = payload
+    },
+
     setDlgLoading(state, payload) {
       state.dlgLoading = payload
     },

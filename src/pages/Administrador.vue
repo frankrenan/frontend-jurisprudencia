@@ -56,7 +56,10 @@ export default {
   },
 
   created() {
-    // console.log(this.$route.fullPath);
+    const usuario = JSON.parse(this.$store.state.usuario);
+    if (usuario.advogado.admin === false) {
+      window.location = "/#/notfound";
+    }
   },
 
   computed: {

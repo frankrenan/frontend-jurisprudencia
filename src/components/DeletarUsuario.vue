@@ -67,7 +67,7 @@ export default {
     deletarUsuario() {
       this.$store.state.dlgLoading = true;
       api
-        .delete(`/usuario/${this.usuario.cpf}`)
+        .delete(`/api/v1/advogado/${this.usuario.cpf}`)
         .then(() => {
           setTimeout(() => {
             this.$store.state.dlgLoading = false;

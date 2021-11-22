@@ -30,5 +30,9 @@ npm run lint
 npm run test:unit
 ```
 
+### Docker
+```
+docker build -t frontend/jurisprudencia .
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
