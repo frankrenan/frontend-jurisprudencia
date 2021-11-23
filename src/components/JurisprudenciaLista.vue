@@ -1,6 +1,6 @@
 <template>
   <div class="p-mt-4 p-ml-6">
-    <h3>Decisórios</h3>
+    <h3>Jurisprudências</h3>
 
     <Card class="card">
       <template #header>
@@ -98,7 +98,7 @@ export default {
     Loading,
   },
   props: {
-    decisorios: {
+    jurisprudencia: {
       type: Array,
       required: true,
     },

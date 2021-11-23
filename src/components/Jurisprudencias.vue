@@ -2,7 +2,7 @@
   <div id="features">
     <Card class="card p-card p-mb-6 p-ml-6" style="width: 75%">
       <template #title>
-        <div style="text-align: left">Pesquisa de Decisórios</div>
+        <div style="text-align: left">Pesquisa de Jurisprudências</div>
       </template>
 
       <template #content>
@@ -29,20 +29,19 @@
       </template>
     </Card>
     <div>
-      <DecisoriosLista :decisorios="this.dados" />
+      <JurisprudenciaLista :jurisprudencia="this.dados" />
     </div>
   </div>
 </template>
-  
 <script>
-import DecisoriosLista from "./DecisoriosLista.vue";
+import JurisprudenciaLista from "./JurisprudenciaLista.vue";
 
 export default {
   data() {
     return {
       campoPesquisa: null,
       pesquisar: false,
-      decisorioService: null,
+      jurisprudenciaService: null,
       dados: null,
     };
   },
@@ -52,10 +51,7 @@ export default {
     },
   },
   components: {
-    DecisoriosLista,
-  },
-  created() {
-    this.decisorioService = new Decisorios();
+    JurisprudenciaLista,
   },
 };
 </script>

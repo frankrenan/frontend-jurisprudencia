@@ -32,7 +32,7 @@ export default {
   created() {
     this.items = [
       { label: "Home", icon: "pi pi-fw pi-home", to: "/home" },
-      { label: "Decisórios", icon: "pi pi-file-o", to: "/decisorios" },
+      { label: "Jurisprudência", icon: "pi pi-file-o", to: "/jurisprudencia" },
       { label: "Fale Conosco", icon: "pi pi-question", to: "/faleConosco" },
       { label: "Sair", icon: "pi pi-sign-out", to: "/login" },
     ];

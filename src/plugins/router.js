@@ -12,10 +12,10 @@ export default new Router({
 			component: () => import('@/components/Home.vue')
 		},
 		{
-			path: '/decisorios',
+			path: '/jurisprudencia',
 			name: 'decisorioSelecionado',
 			exact: true,
-			component: () => import('@/components/Decisorios.vue')
+			component: () => import('@/components/Jurisprudencias.vue')
 		},
 		{
 			path: '/faleConosco',
