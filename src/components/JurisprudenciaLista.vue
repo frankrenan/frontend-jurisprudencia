@@ -9,7 +9,7 @@
       </template>
       <template #content>
         <DataView
-          :value="decisorios"
+          :value="jurisprudencia"
           paginatorPosition="top"
           :paginator="true"
           :rows="5"
@@ -19,18 +19,11 @@
           <template #list="slotProps">
             <Panel style="width: 100%">
               <template #header>
-                <h4>
-                  Processo: {{ slotProps.data.numeroProcesso }}/{{
-                    slotProps.data.anoProcesso
-                  }}
-
-                  Decisório: {{ slotProps.data.numeroDecisorio }}/{{
-                    slotProps.data.anoDecisorio
-                  }}
-                </h4>
+                <h4>Tipo: {{ slotProps.data.tipo }}</h4>
               </template>
+              <h5 style="text-align: justify;">Descrição:</h5>
               <p style="text-align: justify; font-size: 16px">
-                {{ slotProps.data.conteudo }}
+                {{ slotProps.data.objeto }}
               </p>
               <template #icons>
                 <Button icon="pi pi-download" @click="download" />
@@ -38,7 +31,7 @@
             </Panel>
           </template>
           <template #empty>
-            <div v-if="decisorios">
+            <div v-if="jurisprudencia">
               <span>Não foi encontrado nenhum resultado</span>
             </div>
             <div v-else>
@@ -71,7 +64,7 @@ export default {
   watch: {
     selectedCostumers() {
       console.log(this.selectedCostumers);
-      this.decisorioSelecionado(this.selectedCostumers);
+      // this.decisorioSelecionado(this.selectedCostumers);
     },
   },
   methods: {

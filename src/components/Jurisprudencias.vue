@@ -35,6 +35,7 @@
 </template>
 <script>
 import JurisprudenciaLista from "./JurisprudenciaLista.vue";
+import { api } from "../services";
 
 export default {
   data() {
@@ -48,6 +49,15 @@ export default {
   methods: {
     realizarPesquisa() {
       this.$store.state.dlgLoading = true;
+      setTimeout(() => {
+        api
+        .get('/api/v1/jurisprudencia')
+        .then((data) => {
+          this.dados = data.data;
+          console.log(JSON.stringify(data.data));
+        })
+        this.$store.state.dlgLoading = false;
+      }, 2000);
     },
   },
   components: {
