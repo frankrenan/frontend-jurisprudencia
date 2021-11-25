@@ -64,7 +64,7 @@ export default {
 
   computed: {
     propsGeral() {
-      // return this.opcao ? { opcao: this.opcao } : {};
+      return this.opcao ? { opcao: this.opcao } : {};
     },
   },
 
