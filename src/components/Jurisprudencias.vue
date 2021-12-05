@@ -43,7 +43,7 @@ export default {
       campoPesquisa: null,
       pesquisar: false,
       jurisprudenciaService: null,
-      dados: null,
+      dados: [],
     };
   },
   methods: {
@@ -51,11 +51,14 @@ export default {
       this.$store.state.dlgLoading = true;
       setTimeout(() => {
         api
-        .get('/api/v1/jurisprudencia')
-        .then((data) => {
-          this.dados = data.data;
-          console.log(JSON.stringify(data.data));
-        })
+          .get(`/api/v1/jurisprudencia/busca?stringBusca=${this.campoPesquisa}`)
+          .then((data) => {
+            for (const teste of data.data) {
+              // console.log(teste._source);
+              this.dados.push(teste._source);
+            }
+            // console.log(JSON.stringify(data.data._source));
+          });
         this.$store.state.dlgLoading = false;
       }, 2000);
     },

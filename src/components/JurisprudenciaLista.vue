@@ -23,7 +23,7 @@
               </template>
               <h5 style="text-align: justify;">Descrição:</h5>
               <p style="text-align: justify; font-size: 16px">
-                {{ slotProps.data.objeto }}
+                {{ slotProps.data.descricao }}
               </p>
               <template #icons>
                 <Button icon="pi pi-download" @click="download" />
@@ -96,6 +96,14 @@ export default {
       required: true,
     },
   },
+
+  watch: {
+    jurisprudencia(){
+      for (const teste of this.jurisprudencia){
+        console.log(teste.assunto);
+      }
+    }
+  }
 };
 </script>
 
