@@ -50,6 +50,7 @@ export default {
     realizarPesquisa() {
       this.$store.state.dlgLoading = true;
       setTimeout(() => {
+        this.dados = [];
         api
           .get(`/api/v1/jurisprudencia/busca?stringBusca=${this.campoPesquisa}`)
           .then((data) => {
