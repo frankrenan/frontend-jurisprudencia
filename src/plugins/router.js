@@ -13,7 +13,7 @@ export default new Router({
 		},
 		{
 			path: '/jurisprudencia',
-			name: 'decisorioSelecionado',
+			name: 'jurisprudencia',
 			exact: true,
 			component: () => import('@/components/Jurisprudencias.vue')
 		},

@@ -56,10 +56,10 @@ export default {
   },
 
   created() {
-    const usuario = JSON.parse(this.$store.state.usuario);
-    if (usuario.advogado.admin === false) {
-      window.location = "/#/notfound";
-    }
+    // const usuario = JSON.parse(this.$store.state.usuario);
+    // if (usuario.advogado.admin === false) {
+    //   window.location = "/#/notfound";
+    // }
   },
 
   computed: {

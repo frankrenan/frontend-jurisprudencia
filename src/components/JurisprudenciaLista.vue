@@ -21,9 +21,9 @@
               <template #header>
                 <h4>Tipo: {{ slotProps.data.tipo }}</h4>
               </template>
-              <h5 style="text-align: justify;">Descrição:</h5>
+              <h5 style="text-align: justify;">Objeto:</h5>
               <p style="text-align: justify; font-size: 16px">
-                {{ slotProps.data.descricao }}
+                {{ slotProps.data.objeto }}
               </p>
               <template #icons>
                 <Button icon="pi pi-download" @click="download" />

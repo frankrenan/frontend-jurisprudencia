@@ -5,7 +5,7 @@
     <div class="login-content">
       <img src="../assets/logo-principal.png" alt="babylon-layout" />
 
-      <h1><span>ENTRE</span> NO CONSULTA DE DECISÓRIOS</h1>
+      <h1><span>ENTRE</span> NO CONSULTA DE JURISPRUDENCIAS</h1>
       <p>Bem vindo, por favor, preencha o formulário de login.</p>
 
       <div class="login-input-wrapper">
