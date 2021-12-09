@@ -169,7 +169,9 @@ export default {
               life: 3000,
             });
             this.$store.state.dlgCadastrarUsuario = false;
+            location.reload();
           }, 2000);
+          
         })
         .catch(() => {
           setTimeout(() => {

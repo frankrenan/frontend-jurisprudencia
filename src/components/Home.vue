@@ -12,8 +12,8 @@
 
       <div class="p-col-12 p-md-12 p-lg-4">
         <div class="feature-box">
-          <router-link to="/decisorios">
-            <h3>Decisórios</h3>
+          <router-link to="/jurisprudencia">
+            <h3>Jurisprudência</h3>
             <p>Faça sua busca de decisório</p>
           </router-link>
         </div>
@@ -30,7 +30,7 @@
 
        <div class="p-col-12 p-md-12 p-lg-4">
         <div class="feature-box">
-          <router-link to="/home">
+          <router-link to="http://tce.am.gov.br">
             <h3>Portal do TCE</h3>
             <p>Saiba mais no nosso portal de comunicação.</p>
           </router-link>

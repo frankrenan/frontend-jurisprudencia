@@ -49,6 +49,7 @@
 <script>
 import Loading from "./Loading.vue";
 import { api } from "../services";
+
 export default {
   data() {
     return {
@@ -59,7 +60,7 @@ export default {
   },
 
   created() {
-    this.$state.store.usuario = null;
+    // this.$state.store.usuario = null;
   },
   methods: {
     autenticarUsuario() {
@@ -67,9 +68,9 @@ export default {
       api
         .post("/api/v1/autenticar", { cpf: this.cpf, senha: this.senha })
         .then((data) => {
+          // console.log(JSON.stringify(data.data.token));
           this.$store.state.usuario = JSON.stringify(data.data);
           const usuario = JSON.parse(this.$store.state.usuario);
-
           setTimeout(() => {
             this.$store.state.dlgLoading = false;
             if (usuario.advogado.admin === false) {

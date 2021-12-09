@@ -19,11 +19,16 @@
           <template #list="slotProps">
             <Panel style="width: 100%">
               <template #header>
-                <h4>Tipo: {{ slotProps.data.tipo }}</h4>
+                <h4>
+                  Tipo: {{ slotProps.data.tipo }} - {{ slotProps.data.ata }}
+                </h4>
               </template>
-              <h5 style="text-align: justify;">Objeto:</h5>
+              <h5 style="text-align: justify">Objeto:</h5>
               <p style="text-align: justify; font-size: 16px">
-                {{ slotProps.data.objeto }}
+                {{ slotProps.data.objeto }} <strong>Descrição: </strong>
+                {{ slotProps.data.descricao }} <strong>Relator: </strong>
+                {{ slotProps.data.relator }} <strong>Auditor: </strong>
+                {{ slotProps.data.auditor }}.
               </p>
               <template #icons>
                 <Button icon="pi pi-download" @click="download" />
@@ -98,12 +103,12 @@ export default {
   },
 
   watch: {
-    jurisprudencia(){
-      for (const teste of this.jurisprudencia){
+    jurisprudencia() {
+      for (const teste of this.jurisprudencia) {
         console.log(teste.assunto);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

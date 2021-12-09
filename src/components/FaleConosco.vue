@@ -11,7 +11,7 @@
         </template>
 
         <template #content>
-          <form class="p-card-body" style="width: 90%">
+          <form class="p-card-body" style="width: 90%" v-if="verifica">
             <div class="p-field p-col-12" style="width: 100%">
               <div class="p-inputgroup">
                 <span class="p-float-label">
@@ -20,7 +20,33 @@
                     type="email"
                     v-model="email"
                     class="p-inputtext-lg"
-                    :class="{ 'p-invalid': verificaDados }"
+                  />
+                  <!-- <InlineMessage v-if="false">Username is required</InlineMessage> -->
+                  <label for="email">Seu e-mail:</label>
+                </span>
+              </div>
+            </div>
+
+            <div class="p-field p-col-12 p-link" style="width: 100%">
+              <div class="p-inputgroup">
+                <span class="p-float-label">
+                  <Textarea id="textarea" rows="5" v-model="mensagem" />
+                  <label for="textarea">Assunto:</label>
+                </span>
+              </div>
+            </div>
+          </form>
+
+          <form class="p-card-body" style="width: 90%" v-if="!verifica">
+            <div class="p-field p-col-12" style="width: 100%">
+              <div class="p-inputgroup">
+                <span class="p-float-label">
+                  <InputText
+                    id="email"
+                    type="email"
+                    v-model="email"
+                    class="p-inputtext-lg"
+                    :class="{ 'p-invalid': true && email === '' }"
                   />
                   <!-- <InlineMessage v-if="false">Username is required</InlineMessage> -->
                   <label for="email">Seu e-mail:</label>
@@ -35,7 +61,7 @@
                     id="textarea"
                     rows="5"
                     v-model="mensagem"
-                    :class="verificaDados"
+                    :class="{ 'p-invalid': true && mensagem === '' }"
                   />
                   <label for="textarea">Assunto:</label>
                 </span>
@@ -62,30 +88,38 @@ import Loading from "@/pages/Loading";
 export default {
   data() {
     return {
-      email: null,
-      mensagem: null,
-      verifica: false,
+      email: "",
+      mensagem: "",
+      verifica: true,
     };
   },
 
-  computed: {
-    verificaDados() {
-      return this.email === "" || this.mensagem === "" ? true : false;
-    },
-  },
+  computed: {},
 
   methods: {
+    limpaFormulario() {
+      this.email = "";
+      this.mensagem = "";
+    },
+
     enviarFormulario() {
       this.$store.state.dlgLoading = true;
-      setTimeout(() => {
-        this.$toast.add({
-          severity: "success",
-          summary: "Sucesso",
-          detail: "Foi criado um ticket para o nosso sistema interno!",
-          life: 3000,
-        });
+      if (this.mensagem === "" || this.email === "") {
+        this.verifica = false;
         this.$store.state.dlgLoading = false;
-      }, 2000);
+      } else {
+        setTimeout(() => {
+          this.$toast.add({
+            severity: "success",
+            summary: "Sucesso",
+            detail: "Foi criado um ticket para o nosso sistema interno!",
+            life: 3000,
+          });
+          this.limpaFormulario();
+          this.verifica = true;
+          this.$store.state.dlgLoading = false;
+        }, 2000);
+      }
     },
   },
 
